@@ -19,10 +19,10 @@ export const colors = {
   },
 
   system: {
-    sucess: "#6DB95A",
-    error: "#DD5E5E",
-    warning: "#D89614",
-    url: "#177DDC",
+    sucess: "#CDF0EA",
+    error: "#F9F9F9",
+    warning: "#ECC5FB",
+    url: "#FAF4B7",
   },
 
   base: {

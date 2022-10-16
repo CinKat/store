@@ -1,8 +1,22 @@
+import { useEffect, useState } from "react";
+import Home from "./pages/Home/Home";
+import { getProducts } from "./services/products-service";
 
 function App() {
+  const [products, setProducts] = useState('')
+
+  useEffect(() => {
+    getProducts()
+      .then((data) => {
+        setProducts(data)
+      })
+  }, [])
+
+  const popularProducts = products ? products.filter((item) => item.rating.rate > 4.5) : '';
+
   return (
     <div>
-      App-Store
+      <Home products={products} popularProducts={popularProducts} />
     </div>
   );
 }
