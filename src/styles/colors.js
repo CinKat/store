@@ -33,4 +33,6 @@ export const colors = {
     grayBackgroud: "#F5F6F8",
   },
 
+  blue: "#5959D9",
+
 };

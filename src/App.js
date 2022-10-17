@@ -1,6 +1,16 @@
+import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Category from "./components/Category";
+import Header from "./components/Header";
 import Home from "./pages/Home/Home";
-import { getProducts } from "./services/products-service";
+import { createProducts, getProducts } from "./services/products-service";
+import { colors } from "./styles/colors";
+
+const Container = styled.div`
+  margin: 1.5rem 1rem;
+  background-color: ${colors.main.white};
+`
 
 function App() {
   const [products, setProducts] = useState('')
@@ -12,12 +22,26 @@ function App() {
       })
   }, [])
 
+  function handleNewProducts(data) {
+    createProducts(data)
+      .then((product) => {
+        setProducts([...products, product]);
+      })
+      .catch((error) => console.log(error))
+  }
+
   const popularProducts = products ? products.filter((item) => item.rating.rate > 4.5) : '';
 
   return (
-    <div>
-      <Home products={products} popularProducts={popularProducts} />
-    </div>
+    <>
+      <Header />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home products={products} popularProducts={popularProducts} />} />
+          <Route path="category/:categoryId" element={<Category />} />
+        </Routes>
+      </Container>
+    </>
   );
 }
 

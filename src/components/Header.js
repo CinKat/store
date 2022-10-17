@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import logo from '../assets/svg/Logo.svg';
 import { colors } from '../styles/colors';
 import InputSearch from './InputSearch';
@@ -11,7 +12,9 @@ const StyledHeader = styled.header`
 function Header() {
   return (
     <StyledHeader>
-      <img src={logo} />
+      <Link to={'/'}>
+        <img src={logo} />
+      </Link>
       <InputSearch />
     </StyledHeader>
   )

@@ -1,33 +1,42 @@
 import styled from "@emotion/styled";
+import { useEffect, useState } from "react"; import { useParams } from "react-router-dom"
+import { getCategory } from "../services/categories-service";
 import { colors } from "../styles/colors";
-import { typography } from "../styles/typography";
+import Button from "./Button";
+import ListProducts from "./ListProducts";
 
-export const Title = styled.h1`
-  ${typography.head.h2};
+const NameCategory = styled.h4`
+  color: ${colors.main.white};
   text-transform: capitalize;
 `
-
-const Wrapper = styled.div`
-  background-color: ${(props) => (props.color)};
-  border-radius: 0.3rem;
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+const Header = styled.header`
   display: flex;
-  flex-direction: column;
+  background-color: ${colors.blue};
+  padding: 1rem;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-radius: 0.3rem;
 `
+function Category() {
+  let { categoryId } = useParams();
+  const [products, setProducts] = useState('')
 
-function Category({ categories }) {
+  useEffect(() => {
+    getCategory(categoryId)
+      .then((data) => setProducts(data))
+      .catch(console.log)
+  }, [categoryId])
+
   return (
-    <>
-      {categories ? categories.map(({ name, Icon, color } = categories) => (
-        <Wrapper color={color} key={name}>
-          <Icon color={`${colors.main.third}`} size='7rem' />
-          <Title>{name}</Title>
-        </Wrapper>
-      )) : ''}
-    </>
-  );
+    <div>
+      <Header>
+        <NameCategory>{categoryId}</NameCategory>
+        <Button>Agregar producto</Button>
+      </Header>
+      <ListProducts products={products} />
+    </div>
+  )
 }
 
 export default Category
