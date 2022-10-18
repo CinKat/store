@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import Button from "../../components/Button";
+import Form from "../../components/Form";
 import ListCategory, { Title } from "../../components/ListCategory";
 import ListProducts from "../../components/ListProducts";
 import Modal from "../../components/Modal";
@@ -56,7 +57,7 @@ function Home({ products, onSubmit }) {
         state={isOpenModal}
         changeState={setIsOpenModal}
       >
-        <p>Formulario para agregar producto</p>
+        <Form options={categories} />
       </Modal>
     </>
   )
