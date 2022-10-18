@@ -30,14 +30,12 @@ function App() {
       .catch((error) => console.log(error))
   }
 
-  const popularProducts = products ? products.filter((item) => item.rating.rate > 4.5) : '';
-
   return (
     <>
       <Header />
       <Container>
         <Routes>
-          <Route path="/" element={<Home products={products} popularProducts={popularProducts} />} />
+          <Route path="/" element={<Home products={products} onSubmit={handleNewProducts} />} />
           <Route path="category/:categoryId" element={<Category />} />
         </Routes>
       </Container>

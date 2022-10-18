@@ -61,7 +61,7 @@ function ListProducts({ products }) {
         <Card key={title}>
           <Img src={image} />
           <Subtitle>{title}</Subtitle>
-          <Rating rate={rating.rate} />
+          {rating ? <Rating rate={rating.rate} /> : ''}
           <FooterCard>
             <Price>{`$ ${price}`}</Price>
             <Links>

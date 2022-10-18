@@ -5,7 +5,7 @@ export function getProducts() {
 }
 
 export function createProducts(data) {
-  return apiFetch("/products", {
+  return apiFetch('/products', {
     body: data,
   })
 }
