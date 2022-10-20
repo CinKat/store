@@ -50,11 +50,15 @@ const Links = styled.div`
   gap: 0.2rem;
 `
 
-function Card({ product, onUpdate, setOpen, isOpen, getProduct }) {
+function Card({ product, setOpen, isOpen, getProduct, onDelete }) {
 
   function handleClick(id) {
-    setOpen(true)
+    setOpen(!isOpen)
     getProduct(id)
+  }
+
+  function handleClickDelete(id) {
+    onDelete(id)
   }
 
   return (
@@ -68,7 +72,7 @@ function Card({ product, onUpdate, setOpen, isOpen, getProduct }) {
           <CustomIcon onClick={() => { handleClick(product.id) }}>
             <AiOutlineEdit color={`${colors.main.white}`} />
           </CustomIcon>
-          <CustomIcon>
+          <CustomIcon onClick={() => { handleClickDelete(product.id) }}>
             <CgTrash color={`${colors.main.white}`} />
           </CustomIcon>
         </Links>

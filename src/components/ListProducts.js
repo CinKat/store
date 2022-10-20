@@ -11,7 +11,7 @@ const Wrapper = styled.section`
   gap: 1rem;
 `
 
-function ListProducts({ products, onUpdate, options }) {
+function ListProducts({ products, onUpdate, onDelete, options }) {
   const [isOpen, setOpen] = useState(false);
   const [singleProduct, setSingleProduct] = useState('')
 
@@ -31,6 +31,7 @@ function ListProducts({ products, onUpdate, options }) {
           key={product.title}
           isOpen={isOpen}
           setOpen={setOpen}
+          onDelete={onDelete}
           getProduct={handleProduct} />
       )) : ''}
       <Modal

@@ -20,3 +20,9 @@ export function updateProducts(id, data) {
     method: "PATCH",
   })
 }
+
+export function deleteProduct(id) {
+  return apiFetch(`/products/${id}`, {
+    method: "DELETE",
+  })
+}
