@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { useAuth } from "../context/auth-context";
 import Button from "./Button";
 import Input, { Error } from "./Input";
 import Select from "./Select";
@@ -12,12 +13,13 @@ const StyledForm = styled.form`
 `;
 
 const CustomButton = styled(Button)`
-  @media (min-width: 600px) {
-    width: fit-content;
-  }
-`
+  // @media (min-width: 600px) {
+  //   width: fit-content;
+  // }
+`;
 
-function Form({ options, product, onCreate, onUpdate }) {
+function Form({ options, product, modal }) {
+  const { create, update } = useAuth();
   const [dataForm, setForm] = useState({
     title: product ? product.title : '',
     price: product ? product.price : '',
@@ -27,6 +29,27 @@ function Form({ options, product, onCreate, onUpdate }) {
   });
 
   const [errors, setErrors] = useState({})
+
+  function validationForm(form) {
+    let errors = {}
+    if (!form.title.trim()) {
+      errors.title = "El campo es requerido";
+    }
+
+    if (!form.price.trim()) {
+      errors.price = "El campo es requerido";
+    }
+
+    if (!form.category.trim()) {
+      errors.category = "El campo es requerido";
+    }
+
+    if (!form.description.trim()) {
+      errors.description = "El campo es requerido";
+    }
+
+    return errors;
+  }
 
   function handleFormChange(event) {
     const { type, value, id } = event.target;
@@ -47,16 +70,14 @@ function Form({ options, product, onCreate, onUpdate }) {
 
   function handleBlur(event) {
     handleFormChange(event);
-    //setErrors(validationForm(dataForm))
+    setErrors(validationForm(dataForm))
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    product ? onUpdate(product.id, dataForm) : onCreate(dataForm)
+    product ? update(product.id, dataForm) : create(dataForm)
+    modal(false)
   }
-
-  console.log(product)
-  console.log(dataForm)
 
   return (
     <>
@@ -74,7 +95,7 @@ function Form({ options, product, onCreate, onUpdate }) {
           value={dataForm.title}
           onChange={handleFormChange}
           onBlur={handleBlur}
-          error={errors.celular}
+          error={errors.title}
         />
         <Input
           type="number"
@@ -83,7 +104,7 @@ function Form({ options, product, onCreate, onUpdate }) {
           value={dataForm.price}
           onChange={handleFormChange}
           onBlur={handleBlur}
-          error={errors.placa}
+          error={errors.price}
         />
         <Textarea
           placeholder="Description"
@@ -91,7 +112,7 @@ function Form({ options, product, onCreate, onUpdate }) {
           value={dataForm.description}
           onChange={handleFormChange}
           onBlur={handleBlur}
-          error={errors.placa}
+          error={errors.description}
         />
         <Input
           type="file"
@@ -102,7 +123,7 @@ function Form({ options, product, onCreate, onUpdate }) {
           file={dataForm.image}
           onChange={handleFormChange}
           onBlur={handleBlur}
-          error={errors.placa}
+          error={errors.image}
         />
         {errors && <Error>{errors.form}</Error>}
         <CustomButton isFullWidth>{product ? 'Update' : 'Add'}</CustomButton>

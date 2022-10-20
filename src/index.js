@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { global, reset } from './styles/global';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from './context/auth-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,7 +12,9 @@ root.render(
     <BrowserRouter>
       <Global styles={reset} />
       <Global styles={global} />
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

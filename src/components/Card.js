@@ -5,6 +5,7 @@ import { AiOutlineEdit } from 'react-icons/ai'
 import { CgTrash } from 'react-icons/cg'
 import { useEffect, useState } from "react"
 import Rating from "./Rating"
+import { useAuth } from "../context/auth-context"
 
 const Img = styled.img`
   height: 11.5rem;
@@ -50,15 +51,16 @@ const Links = styled.div`
   gap: 0.2rem;
 `
 
-function Card({ product, setOpen, isOpen, getProduct, onDelete }) {
+function Card({ product, setOpen, isOpen, getProduct }) {
+  const { remove } = useAuth();
 
-  function handleClick(id) {
-    setOpen(!isOpen)
+
+  function handleClickUpdate(id) {
     getProduct(id)
   }
 
   function handleClickDelete(id) {
-    onDelete(id)
+    remove(id)
   }
 
   return (
@@ -69,7 +71,7 @@ function Card({ product, setOpen, isOpen, getProduct, onDelete }) {
       <FooterCard>
         <Price>{`$ ${product.price}`}</Price>
         <Links>
-          <CustomIcon onClick={() => { handleClick(product.id) }}>
+          <CustomIcon onClick={() => { handleClickUpdate(product.id) }}>
             <AiOutlineEdit color={`${colors.main.white}`} />
           </CustomIcon>
           <CustomIcon onClick={() => { handleClickDelete(product.id) }}>

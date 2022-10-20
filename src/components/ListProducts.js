@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
+import { useAuth } from "../context/auth-context";
 import { getSingleProduct } from "../services/products-service";
 import Card from "./Card";
 import Form from "./Form";
@@ -11,7 +12,8 @@ const Wrapper = styled.section`
   gap: 1rem;
 `
 
-function ListProducts({ products, onUpdate, onDelete, options }) {
+function ListProducts({ options, categoryProducts }) {
+  const { products } = useAuth();
   const [isOpen, setOpen] = useState(false);
   const [singleProduct, setSingleProduct] = useState('')
 
@@ -19,6 +21,7 @@ function ListProducts({ products, onUpdate, onDelete, options }) {
     getSingleProduct(id)
       .then((product) => {
         setSingleProduct(product)
+        setOpen(!isOpen)
       })
       .catch((error) => { console.log(error) })
   }
@@ -30,8 +33,6 @@ function ListProducts({ products, onUpdate, onDelete, options }) {
           product={product}
           key={product.title}
           isOpen={isOpen}
-          setOpen={setOpen}
-          onDelete={onDelete}
           getProduct={handleProduct} />
       )) : ''}
       <Modal
@@ -39,7 +40,7 @@ function ListProducts({ products, onUpdate, onDelete, options }) {
         changeState={setOpen}
         title="Edit product"
       >
-        <Form options={options} product={singleProduct} onUpdate={onUpdate} />
+        <Form options={options} product={singleProduct} modal={setOpen} />
       </Modal>
     </Wrapper>
   )

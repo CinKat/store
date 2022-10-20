@@ -11,18 +11,18 @@ const NameCategory = styled.h4`
 
 function Category() {
   let { categoryId } = useParams();
-  const [products, setProducts] = useState('')
+  const [categoryProducts, setCategoryProducts] = useState('')
 
   useEffect(() => {
     getCategory(categoryId)
-      .then((data) => setProducts(data))
+      .then((data) => setCategoryProducts(data))
       .catch(console.log)
   }, [categoryId])
 
   return (
     <div>
       <NameCategory>{categoryId}</NameCategory>
-      <ListProducts products={products} />
+      <ListProducts categoryProducts={categoryProducts} />
     </div>
   )
 }

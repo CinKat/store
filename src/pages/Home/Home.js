@@ -17,7 +17,7 @@ const Header = styled.header`
   border-radius: 0.3rem;
 `
 
-function Home({ products, onCreate, onUpdate, onDelete }) {
+function Home() {
   const [categories, setCategories] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -37,13 +37,13 @@ function Home({ products, onCreate, onUpdate, onDelete }) {
         <Title>All Products</Title>
         <Button onClick={() => { setIsOpenModal(!isOpenModal) }}>Add product</Button>
       </Header>
-      <ListProducts products={products} options={categories} onUpdate={onUpdate} onDelete={onDelete} />
+      <ListProducts options={categories} />
       <Modal
         state={isOpenModal}
         changeState={setIsOpenModal}
         title="Add Products"
       >
-        <Form options={categories} onCreate={onCreate} />
+        <Form options={categories} modal={setIsOpenModal} />
       </Modal>
     </>
   )
