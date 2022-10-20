@@ -7,9 +7,9 @@ const Label = styled.label`
   color: ${colors.text.paragraph};
 `;
 
-const StyledInput = styled.input`
+const StyledTextarea = styled.textarea`
   padding: 1rem 1.5rem;
-  border-radius: 3rem;
+  border-radius: 1.8rem;
   border: none;
   background-color: ${colors.main.white};
   &:focus {
@@ -26,7 +26,6 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  ${(props) => typeStyles(props.type)};
 `;
 
 export const Error = styled.p`
@@ -34,30 +33,9 @@ export const Error = styled.p`
   padding-left: 1rem;
 `;
 
-function typeStyles(type) {
-  switch (type) {
-    case 'file':
-      return `
-        & > input {
-          display: none;
-        }
-
-        & > label {
-          padding: 0.5rem 1.5rem; 
-          border-radius: 0.5rem; 
-          border: solid 1px black;
-          width: fit-content;
-        }
-      `
-    default:
-      break;
-  }
-}
-
-function Input({
+function Textarea({
   id,
   name,
-  type = "text",
   placeholder,
   label,
   error,
@@ -67,12 +45,11 @@ function Input({
   name ||= id;
 
   return (
-    <InputContainer type={type}>
+    <InputContainer>
       {label && <Label htmlFor={id}>{label}</Label>}
-      <StyledInput
+      <StyledTextarea
         id={id}
         name={name}
-        type={type}
         placeholder={placeholder}
         size={size}
         {...rest}
@@ -82,4 +59,4 @@ function Input({
   );
 }
 
-export default Input;
+export default Textarea;

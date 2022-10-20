@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { FaStar } from 'react-icons/fa'
-import { Subtitle } from './ListProducts';
+import { Subtitle } from './Card';
 
 const StyledRating = styled.div`
   display: flex;

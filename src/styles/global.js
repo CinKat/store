@@ -86,9 +86,7 @@ export const global = css`
 
   body {
     font-family: ${fonts.primary};
-    /* padding: 1rem; */
     max-width: 360px;
-    margin: 0 auto;
     color: ${colors.text.txt};
   }
 `;

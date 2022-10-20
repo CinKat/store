@@ -3,91 +3,109 @@ import { useState } from "react";
 import Button from "./Button";
 import Input, { Error } from "./Input";
 import Select from "./Select";
+import Textarea from "./Textarea";
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* min-width: 18.5rem;
-  padding: 2.5rem 2rem 3.37rem 2rem;
-  gap: 1.5rem;
-  @media (min-width: 600px) {
-    max-width: 18rem;
-    display: flex;
-    padding: 3rem 4rem 3rem 0;
-    margin-left: auto;
-    margin-right: auto; 
-  } */
 `;
 
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 1rem;
-`
-const FormTitle = styled.h3`
-  letter-spacing: -0.2px;
-`
 const CustomButton = styled(Button)`
   @media (min-width: 600px) {
     width: fit-content;
   }
 `
 
-function Form({ options }) {
+function Form({ options, product, onCreate, onUpdate }) {
   const [dataForm, setForm] = useState({
-    dni: "",
-    celular: "",
-    placa: "",
-    terminos: true,
+    title: product ? product.title : '',
+    price: product ? product.price : '',
+    description: product ? product.description : '',
+    image: product ? product.image : '',
+    category: product ? product.category : '',
   });
+
   const [errors, setErrors] = useState({})
 
   function handleFormChange(event) {
-    const { type, name, value, id, checked } = event.target;
-    if (type === "text") {
-      setForm({ ...dataForm, [name]: value });
-    }
-    if (type === "checkbox") {
-      setForm({ ...dataForm, [id]: checked })
+    const { type, value, id } = event.target;
+    if (type === 'file') {
+      const reader = new FileReader();
+      console.log(reader)
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setForm({ ...dataForm, [id]: reader.result })
+        }
+      }
+      reader.readAsDataURL(event.target.files[0])
+    } else {
+      setForm({ ...dataForm, [id]: value });
     }
   }
+
 
   function handleBlur(event) {
     handleFormChange(event);
     //setErrors(validationForm(dataForm))
   }
 
-
   function handleSubmit(event) {
     event.preventDefault();
+    product ? onUpdate(product.id, dataForm) : onCreate(dataForm)
   }
+
+  console.log(product)
+  console.log(dataForm)
 
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
-        <Select defaultValue="Category" options={options} />
+        <Select
+          id="category"
+          value={dataForm.category}
+          onChange={handleFormChange}
+          options={options}
+        />
         <Input
-          border
           placeholder="Name of product"
           id="title"
-          value={dataForm.celular}
+          data={product}
+          value={dataForm.title}
           onChange={handleFormChange}
           onBlur={handleBlur}
           error={errors.celular}
         />
         <Input
-          border
+          type="number"
           placeholder="Price"
           id="price"
-          value={dataForm.placa}
+          value={dataForm.price}
+          onChange={handleFormChange}
+          onBlur={handleBlur}
+          error={errors.placa}
+        />
+        <Textarea
+          placeholder="Description"
+          id="description"
+          value={dataForm.description}
+          onChange={handleFormChange}
+          onBlur={handleBlur}
+          error={errors.placa}
+        />
+        <Input
+          type="file"
+          accept="image/*"
+          label="File upload"
+          placeholder="Image"
+          id="image"
+          file={dataForm.image}
           onChange={handleFormChange}
           onBlur={handleBlur}
           error={errors.placa}
         />
         {errors && <Error>{errors.form}</Error>}
-        <CustomButton isFullWidth>Add</CustomButton>
+        <CustomButton isFullWidth>{product ? 'Update' : 'Add'}</CustomButton>
       </StyledForm>
     </>
   )

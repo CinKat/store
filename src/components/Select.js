@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles/colors";
 import { typography } from "../styles/typography";
+import chevron from "../assets/svg/chevron.svg";
+
 
 const StyledSelect = styled.select`
   width: 100%;
@@ -11,6 +13,11 @@ const StyledSelect = styled.select`
   color: ${colors.text.subtxt};
   ${typography.text.txt1};
   text-transform: capitalize;
+  appearance: none;
+  background-image: url(${chevron});
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: calc(100% - 21px);
   &:focus {
     outline: none;
   }
@@ -22,14 +29,13 @@ const StyledLabel = styled.label`
 `;
 
 function Select({ label, options, defaultValue, ...rest }) {
-  console.log(options)
   return (
     <div>
       {label && <StyledLabel>{label}</StyledLabel>}
-      <StyledSelect {...rest} defaultValue={defaultValue}>
-        {defaultValue && <option disabled>{defaultValue}</option>}
+      <StyledSelect {...rest}>
+        {/* <option disabled>Category</option> */}
         {options.map((option) => (
-          <option>{option.name}</option>
+          <option key={option.name}>{option.name}</option>
         ))}
       </StyledSelect>
     </div>

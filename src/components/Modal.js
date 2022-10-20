@@ -46,13 +46,13 @@ const CloseButton = styled.button`
   align-items: center;
 `
 
-function Modal({ children, state, changeState }) {
+function Modal({ children, state, changeState, title }) {
   return (
     <>
       {state &&
         <Overlay>
           <ModalContainer>
-            <ModalHeader>Add Products</ModalHeader>
+            <ModalHeader>{title}</ModalHeader>
             <CloseButton onClick={() => { changeState(!state) }}>
               <MdOutlineClose />
             </CloseButton>

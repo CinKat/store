@@ -17,7 +17,7 @@ const Header = styled.header`
   border-radius: 0.3rem;
 `
 
-function Home({ products, onSubmit }) {
+function Home({ products, onCreate, onUpdate }) {
   const [categories, setCategories] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -30,21 +30,6 @@ function Home({ products, onSubmit }) {
       .catch(console.log)
   }, [])
 
-  function handleClick() {
-    const data = {
-      title: 'T-shirt',
-      price: 13.5,
-      description: 'lorem ipsum set',
-      image: 'https://images.unsplash.com/photo-1522706604291-210a56c3b376?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
-      category: `electronics`,
-      rating: {
-        rate: 1,
-        count: 0,
-      }
-    }
-    onSubmit(data)
-  }
-
   return (
     <>
       <ListCategory categories={categories} />
@@ -52,12 +37,13 @@ function Home({ products, onSubmit }) {
         <Title>All Products</Title>
         <Button onClick={() => { setIsOpenModal(!isOpenModal) }}>Add product</Button>
       </Header>
-      <ListProducts products={products} />
+      <ListProducts products={products} options={categories} onUpdate={onUpdate} />
       <Modal
         state={isOpenModal}
         changeState={setIsOpenModal}
+        title="Add Products"
       >
-        <Form options={categories} />
+        <Form options={categories} onCreate={onCreate} />
       </Modal>
     </>
   )
