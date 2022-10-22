@@ -51,7 +51,7 @@ const Links = styled.div`
   gap: 0.2rem;
 `
 
-function Card({ product, setOpen, isOpen, getProduct }) {
+function Card({ product, getProduct }) {
   const { remove } = useAuth();
 
 

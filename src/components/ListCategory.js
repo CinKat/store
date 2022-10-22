@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth-context";
 import { colors } from "../styles/colors";
 import { typography } from "../styles/typography";
 
@@ -20,7 +21,9 @@ const Wrapper = styled(Link)`
   color: ${colors.main.medium};
 `
 
-function ListCategory({ categories }) {
+function ListCategory() {
+  const { categories } = useAuth()
+
   return (
     <>
       {categories ? categories.map(({ name, Icon, color } = categories) => (

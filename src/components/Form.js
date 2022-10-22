@@ -18,7 +18,8 @@ const CustomButton = styled(Button)`
   // }
 `;
 
-function Form({ options, product, modal }) {
+
+function Form({ product, modal }) {
   const { create, update } = useAuth();
   const [dataForm, setForm] = useState({
     title: product ? product.title : '',
@@ -75,10 +76,13 @@ function Form({ options, product, modal }) {
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(product.id)
+    console.log(dataForm)
     product ? update(product.id, dataForm) : create(dataForm)
     modal(false)
   }
 
+  console.log(product)
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
@@ -86,7 +90,6 @@ function Form({ options, product, modal }) {
           id="category"
           value={dataForm.category}
           onChange={handleFormChange}
-          options={options}
         />
         <Input
           placeholder="Name of product"

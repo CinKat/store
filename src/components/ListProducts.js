@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import { useAuth } from "../context/auth-context";
+import { useState } from "react";
 import { getSingleProduct } from "../services/products-service";
 import Card from "./Card";
 import Form from "./Form";
@@ -12,14 +11,19 @@ const Wrapper = styled.section`
   gap: 1rem;
 `
 
-function ListProducts({ options, products }) {
+function ListProducts({ products }) {
   const [isOpen, setOpen] = useState(false);
   const [singleProduct, setSingleProduct] = useState('')
 
   function handleProduct(id) {
     getSingleProduct(id)
       .then((product) => {
-        setSingleProduct(product)
+        if (typeof (product) === 'object') {
+          setSingleProduct(product)
+        } else {
+          let currentProduct = products.find((product) => product.id === id)
+          setSingleProduct(currentProduct)
+        }
         setOpen(!isOpen)
       })
       .catch((error) => { console.log(error) })
@@ -39,7 +43,7 @@ function ListProducts({ options, products }) {
         changeState={setOpen}
         title="Edit product"
       >
-        <Form options={options} product={singleProduct} modal={setOpen} />
+        <Form product={singleProduct} modal={setOpen} />
       </Modal>
     </Wrapper>
   )

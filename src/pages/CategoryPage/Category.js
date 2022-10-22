@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react"; import { useParams } from "react-router-dom"
+import { useEffect } from "react"; import { useParams } from "react-router-dom"
 import { getCategory } from "../../services/categories-service";
 import { colors } from "../../styles/colors";
 import ListProducts from "../../components/ListProducts";
+import { useAuth } from "../../context/auth-context";
 
 const NameCategory = styled.h4`
   color: ${colors.main.thiclBlack};
@@ -11,11 +12,11 @@ const NameCategory = styled.h4`
 
 function Category() {
   let { categoryId } = useParams();
-  const [productsCategory, setProductsCategory] = useState('')
+  const { allCategory, productsCategory } = useAuth();
 
   useEffect(() => {
     getCategory(categoryId)
-      .then((data) => setProductsCategory(data))
+      .then((data) => allCategory(data))
       .catch(console.log)
   }, [categoryId])
 

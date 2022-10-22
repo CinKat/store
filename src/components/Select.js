@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { colors } from "../styles/colors";
 import { typography } from "../styles/typography";
 import chevron from "../assets/svg/chevron.svg";
+import { useAuth } from "../context/auth-context";
 
 
 const StyledSelect = styled.select`
@@ -28,13 +29,15 @@ const StyledLabel = styled.label`
   text-transform: uppercase;
 `;
 
-function Select({ label, options, defaultValue, ...rest }) {
+function Select({ label, defaultValue, ...rest }) {
+  const { categories } = useAuth()
+
   return (
     <div>
       {label && <StyledLabel>{label}</StyledLabel>}
       <StyledSelect {...rest}>
         {/* <option disabled>Category</option> */}
-        {options.map((option) => (
+        {categories.map((option) => (
           <option key={option.name}>{option.name}</option>
         ))}
       </StyledSelect>

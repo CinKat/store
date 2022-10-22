@@ -50,7 +50,7 @@ export default async function apiFetch(
   try {
     data = await response.json();
   } catch (error) {
-    data = response.statusText;
+    data = response.status;
   }
 
   return data;
