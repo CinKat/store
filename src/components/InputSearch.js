@@ -22,10 +22,22 @@ const InputContainer = styled.div`
   border-radius: 4.3rem;
   background-color: ${colors.main.white};
 `
-function InputSearch() {
+function InputSearch({
+  id,
+  name,
+  type = "text",
+  ...rest }) {
+  name ||= id;
+
   return (
     <InputContainer>
-      <StyledInput placeholder="Search anything" />
+      <StyledInput
+        placeholder="Search anything"
+        id={id}
+        name={name}
+        type={type}
+        {...rest}
+      />
       <TbSearch color={colors.main.medium} />
     </InputContainer>
   )

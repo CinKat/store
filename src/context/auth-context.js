@@ -1,10 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getCategory } from "../services/categories-service";
 import { createProducts, deleteProduct, getProducts, updateProducts } from "../services/products-service";
 
 const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [products, setProducts] = useState('');
+  const [productsCategory, setProductsCategory] = useState('')
+
 
   useEffect(() => {
     getProducts()
@@ -12,6 +16,12 @@ function AuthProvider({ children }) {
         setProducts(data)
       })
   }, [])
+
+  function getProductsByCategory(id) {
+    getCategory(id)
+      .then((data) => setProductsCategory(data))
+      .catch(console.log)
+  }
 
   function handleNewProducts(data) {
     createProducts(data)
@@ -35,7 +45,6 @@ function AuthProvider({ children }) {
       .catch((error) => console.log(error))
   }
 
-
   function handleDeleteProducts(id) {
     deleteProduct(id)
       .then((product) => {
@@ -49,9 +58,11 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         products,
+        productsCategory,
         create: handleNewProducts,
         update: handleUpdateProducts,
         remove: handleDeleteProducts,
+        getProductsByCategory: getProductsByCategory,
       }}
     >
       {children}

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useSearchParams } from "react-router-dom";
 import Category from "./components/Category";
 import Header from "./components/Header";
 import Home from "./pages/Home/Home";
@@ -11,17 +11,27 @@ const Container = styled.div`
 `
 
 function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query") ?? "";
 
+  function changeSearchParams(keyword) {
+    setSearchParams(keyword)
+  }
+
+  console.log(query)
 
   return (
     <>
-      <Header />
-      <Container>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="category/:categoryId" element={<Category />} />
-        </Routes>
-      </Container>
+      <Header query={query} onSearch={changeSearchParams} />
+      {!query ?
+        <Container>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="category/:categoryId" element={<Category />} />
+          </Routes>
+        </Container>
+        : ''}
+
     </>
   );
 }

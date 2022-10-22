@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { getSingleProduct } from "../services/products-service";
 import Card from "./Card";
@@ -12,8 +12,7 @@ const Wrapper = styled.section`
   gap: 1rem;
 `
 
-function ListProducts({ options, categoryProducts }) {
-  const { products } = useAuth();
+function ListProducts({ options, products }) {
   const [isOpen, setOpen] = useState(false);
   const [singleProduct, setSingleProduct] = useState('')
 

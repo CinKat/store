@@ -5,6 +5,7 @@ import Form from "../../components/Form";
 import ListCategory, { Title } from "../../components/ListCategory";
 import ListProducts from "../../components/ListProducts";
 import Modal from "../../components/Modal";
+import { useAuth } from "../../context/auth-context";
 import { getCategories } from "../../services/categories-service";
 import { handleCategories } from "./utils";
 
@@ -18,6 +19,7 @@ const Header = styled.header`
 `
 
 function Home() {
+  const { products } = useAuth()
   const [categories, setCategories] = useState("");
   const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -37,7 +39,7 @@ function Home() {
         <Title>All Products</Title>
         <Button onClick={() => { setIsOpenModal(!isOpenModal) }}>Add product</Button>
       </Header>
-      <ListProducts options={categories} />
+      <ListProducts options={categories} products={products} />
       <Modal
         state={isOpenModal}
         changeState={setIsOpenModal}

@@ -1,28 +1,26 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react"; import { useParams } from "react-router-dom"
-import { getCategory } from "../services/categories-service";
+import { useEffect } from "react"; import { useParams } from "react-router-dom"
+import { useAuth } from "../context/auth-context";
 import { colors } from "../styles/colors";
 import ListProducts from "./ListProducts";
 
 const NameCategory = styled.h4`
-  color: ${colors.main.white};
+  color: ${colors.main.thiclBlack};
   text-transform: capitalize;
 `
 
 function Category() {
   let { categoryId } = useParams();
-  const [categoryProducts, setCategoryProducts] = useState('')
+  const { getProductsByCategory, productsCategory } = useAuth()
 
   useEffect(() => {
-    getCategory(categoryId)
-      .then((data) => setCategoryProducts(data))
-      .catch(console.log)
-  }, [categoryId])
+    getProductsByCategory(categoryId)
+  }, [categoryId, getProductsByCategory])
 
   return (
     <div>
       <NameCategory>{categoryId}</NameCategory>
-      <ListProducts categoryProducts={categoryProducts} />
+      <ListProducts products={productsCategory} />
     </div>
   )
 }
