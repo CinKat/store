@@ -7,7 +7,6 @@ const AuthContext = createContext();
 
 function AuthProvider({ children }) {
   const [products, setProducts] = useState('');
-  const [productsCategory, setProductsCategory] = useState('')
 
 
   useEffect(() => {
@@ -17,11 +16,6 @@ function AuthProvider({ children }) {
       })
   }, [])
 
-  function getProductsByCategory(id) {
-    getCategory(id)
-      .then((data) => setProductsCategory(data))
-      .catch(console.log)
-  }
 
   function handleNewProducts(data) {
     createProducts(data)
@@ -58,11 +52,9 @@ function AuthProvider({ children }) {
     <AuthContext.Provider
       value={{
         products,
-        productsCategory,
         create: handleNewProducts,
         update: handleUpdateProducts,
         remove: handleDeleteProducts,
-        getProductsByCategory: getProductsByCategory,
       }}
     >
       {children}

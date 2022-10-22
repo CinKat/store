@@ -10,7 +10,9 @@ const StyledInput = styled.input`
     ${typography.text.txt1};
     color: ${colors.text.subtxt};
   }
-  
+  &:focus {
+    outline: none;
+  }
 `
 const InputContainer = styled.div`
   margin-top: 0.75rem;

@@ -1,19 +1,25 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import logo from '../assets/svg/Logo.svg';
-import { useAuth } from '../context/auth-context';
-import { colors } from '../styles/colors';
-import InputSearch from './InputSearch';
-import ListProducts from './ListProducts';
+import { useNavigate } from 'react-router-dom';
+import logo from '../../assets/svg/Logo.svg';
+import { useAuth } from '../../context/auth-context';
+import { colors } from '../../styles/colors';
+import InputSearch from '../../components/InputSearch';
+import ListProducts from '../../components/ListProducts';
 
 const StyledHeader = styled.header`
   padding: 2rem 1rem 1.5rem 1rem;
   background-color: ${colors.base.softBackground};
 `
+const StyledButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+`
 
-function Header({ query, onSearch }) {
+function Search({ query, onSearch }) {
   const { products } = useAuth()
+  const navigate = useNavigate();
   const [filterData, setFilterData] = useState()
 
   function handleFilter(event) {
@@ -30,13 +36,18 @@ function Header({ query, onSearch }) {
     }
   }
 
+  function handleClick() {
+    setFilterData("")
+    navigate("/")
+  }
+
 
   return (
     <>
       <StyledHeader>
-        <Link to="/">
+        <StyledButton onClick={handleClick}>
           <img src={logo} />
-        </Link>
+        </StyledButton>
         <form onSubmit={handleSubmit}>
           <InputSearch
             value={query}
@@ -44,9 +55,10 @@ function Header({ query, onSearch }) {
           />
         </form>
       </StyledHeader>
+      {filterData && filterData.length === 0 && query !== '' ? <p>No hay producto</p> : ''}
       {query ? <ListProducts products={filterData} /> : ''}
     </>
   )
 }
 
-export default Header;
+export default Search;
