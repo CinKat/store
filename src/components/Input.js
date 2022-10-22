@@ -3,7 +3,7 @@ import { colors } from "../styles/colors";
 import { typography } from "../styles/typography";
 
 const Label = styled.label`
-  ${typography.head.h1};
+  ${typography.text.txt2};
   color: ${colors.text.paragraph};
 `;
 
@@ -12,6 +12,8 @@ const StyledInput = styled.input`
   border-radius: 3rem;
   border: none;
   background-color: ${colors.main.white};
+  color: ${colors.text.paragraph};
+  ${typography.text.txt1};
   &:focus {
     outline: none;
   }
@@ -30,7 +32,8 @@ const InputContainer = styled.div`
 `;
 
 export const Error = styled.p`
-  color: ${colors.main.softBlack};
+  color: ${colors.error};
+  ${typography.text.txt2};
   padding-left: 1rem;
 `;
 

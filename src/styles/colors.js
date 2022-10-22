@@ -34,5 +34,6 @@ export const colors = {
   },
 
   blue: "#EEF1FF",
+  error: "#DD5E5E",
 
 };

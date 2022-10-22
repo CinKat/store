@@ -5,6 +5,7 @@ import Button from "./Button";
 import Input, { Error } from "./Input";
 import Select from "./Select";
 import Textarea from "./Textarea";
+import NewImage from "../assets/svg/add-image.svg";
 
 const StyledForm = styled.form`
   display: flex;
@@ -18,18 +19,18 @@ const CustomButton = styled(Button)`
   // }
 `;
 
-
 function Form({ product, modal }) {
   const { create, update } = useAuth();
   const [dataForm, setForm] = useState({
     title: product ? product.title : '',
     price: product ? product.price : '',
     description: product ? product.description : '',
-    image: product ? product.image : '',
-    category: product ? product.category : '',
+    image: product ? product.image : NewImage,
+    category: product ? product.category : 'electronics',
   });
 
   const [errors, setErrors] = useState({})
+  console.log(dataForm)
 
   function validationForm(form) {
     let errors = {}
@@ -37,12 +38,8 @@ function Form({ product, modal }) {
       errors.title = "El campo es requerido";
     }
 
-    if (!form.price.trim()) {
+    if (form.price === '') {
       errors.price = "El campo es requerido";
-    }
-
-    if (!form.category.trim()) {
-      errors.category = "El campo es requerido";
     }
 
     if (!form.description.trim()) {
@@ -76,10 +73,13 @@ function Form({ product, modal }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(product.id)
-    console.log(dataForm)
-    product ? update(product.id, dataForm) : create(dataForm)
-    modal(false)
+    console.log(errors)
+    if (Object.keys(errors).length === 0) {
+      product ? update(product.id, dataForm) : create(dataForm)
+      modal(false)
+    } else {
+      return;
+    }
   }
 
   console.log(product)
@@ -120,7 +120,7 @@ function Form({ product, modal }) {
         <Input
           type="file"
           accept="image/*"
-          label="File upload"
+          label="Upload Image"
           placeholder="Image"
           id="image"
           file={dataForm.image}

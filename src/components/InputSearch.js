@@ -6,6 +6,8 @@ import { typography } from "../styles/typography"
 
 const StyledInput = styled.input`
   border: none;
+  color: ${colors.text.paragraph};
+  ${typography.head.h1};
   &::placeholder {
     ${typography.text.txt1};
     color: ${colors.text.subtxt};

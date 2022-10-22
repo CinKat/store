@@ -8,6 +8,7 @@ import { useAuth } from "../../context/auth-context";
 const NameCategory = styled.h4`
   color: ${colors.main.thiclBlack};
   text-transform: capitalize;
+  padding-bottom: 1.5rem;
 `
 
 function Category() {

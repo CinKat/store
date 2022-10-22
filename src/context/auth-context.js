@@ -30,8 +30,6 @@ function AuthProvider({ children }) {
     setProductsCategory(categories)
   }
 
-
-  console.log(productsCategory)
   function handleNewProducts(data) {
     createProducts(data)
       .then((product) => {
@@ -51,12 +49,12 @@ function AuthProvider({ children }) {
           return item
         })
 
-        let updateCategoryData = productsCategory.map((item) => {
+        let updateCategoryData = productsCategory ? productsCategory.map((item) => {
           if (item.id === product.id) {
             item = { ...item, ...product }
           }
           return item
-        })
+        }) : ''
         setProducts(updateData);
         setProductsCategory(updateCategoryData)
       })
@@ -68,7 +66,7 @@ function AuthProvider({ children }) {
     deleteProduct(id)
       .then((product) => {
         let filterData = products.filter((item) => item.id !== product.id)
-        let filterCategoryData = productsCategory.filter((item) => item.id !== product.id)
+        let filterCategoryData = productsCategory ? productsCategory.filter((item) => item.id !== product.id) : ''
 
         setProducts(filterData);
         setProductsCategory(filterCategoryData)

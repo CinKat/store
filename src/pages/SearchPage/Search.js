@@ -6,15 +6,22 @@ import { useAuth } from '../../context/auth-context';
 import { colors } from '../../styles/colors';
 import InputSearch from '../../components/InputSearch';
 import ListProducts from '../../components/ListProducts';
+import { typography } from '../../styles/typography';
 
 const StyledHeader = styled.header`
   padding: 2rem 1rem 1.5rem 1rem;
   background-color: ${colors.base.softBackground};
+  margin-bottom: 2rem;
 `
 const StyledButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
+`
+const Warning = styled.p`
+  ${typography.text.txt3};
+  color: ${colors.text.paragraph};
+  padding: 3rem 3rem;
 `
 
 function Search({ query, onSearch }) {
@@ -55,7 +62,8 @@ function Search({ query, onSearch }) {
           />
         </form>
       </StyledHeader>
-      {filterData && filterData.length === 0 && query !== '' ? <p>No hay producto</p> : ''}
+      {filterData && filterData.length === 0 && query !== '' ?
+        <Warning>The product was not found</Warning> : ''}
       {query ? <ListProducts products={filterData} /> : ''}
     </>
   )

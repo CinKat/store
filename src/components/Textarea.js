@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { colors } from "../styles/colors";
 import { typography } from "../styles/typography";
+import { Error } from "./Input";
 
 const Label = styled.label`
   ${typography.head.h1};
@@ -12,6 +13,8 @@ const StyledTextarea = styled.textarea`
   border-radius: 1.8rem;
   border: none;
   background-color: ${colors.main.white};
+  color: ${colors.text.paragraph};
+  ${typography.text.txt1};
   &:focus {
     outline: none;
   }
@@ -26,11 +29,6 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-`;
-
-export const Error = styled.p`
-  color: ${colors.main.softBlack};
-  padding-left: 1rem;
 `;
 
 function Textarea({
