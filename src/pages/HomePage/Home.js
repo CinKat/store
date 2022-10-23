@@ -6,6 +6,7 @@ import ListCategory, { Title } from "../../components/ListCategory";
 import ListProducts from "../../components/ListProducts";
 import Modal from "../../components/Modal";
 import { useAuth } from "../../context/auth-context";
+import { typography } from "../../styles/typography";
 
 const Header = styled.header`
   display: flex;
@@ -14,6 +15,9 @@ const Header = styled.header`
   justify-content: space-between;
   margin-bottom: 1.5rem;
   border-radius: 0.3rem;
+`
+const CustomTitle = styled(Title)`
+  ${typography.head.h3};
 `
 
 function Home() {
@@ -24,8 +28,8 @@ function Home() {
     <>
       <ListCategory />
       <Header>
-        <Title>All Products</Title>
-        <Button onClick={() => { setIsOpenModal(!isOpenModal) }}>Add product</Button>
+        <CustomTitle>All Products</CustomTitle>
+        <Button onClick={() => { setIsOpenModal(!isOpenModal) }} >Add product</Button>
       </Header>
       <ListProducts products={products} />
       <Modal

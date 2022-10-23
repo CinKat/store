@@ -18,7 +18,7 @@ const ContentCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 16rem;
+  width: 15rem;
   padding: 0.5rem 0.5rem 1rem 0.5rem;
   background: ${colors.main.white};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);

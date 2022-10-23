@@ -9,10 +9,9 @@ export const Title = styled.h1`
   text-transform: capitalize;
 `
 const Container = styled.div`
-  @media (min-width: 600px) {
-    display: flex;
-    gap: 2rem;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(270px, 1fr));
+  gap: 1rem;
 `
 
 const Wrapper = styled(Link)`
@@ -25,13 +24,6 @@ const Wrapper = styled(Link)`
   align-items: center;
   text-decoration: none;
   color: ${colors.main.medium};
-  @media (min-width: 800px) {
-    width: 9rem;
-  }
-
-  @media (min-width: 900px) {
-    min-width: 16rem;
-  }
 `
 
 function ListCategory() {

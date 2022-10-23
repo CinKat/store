@@ -5,15 +5,11 @@ import Card from "./Card";
 import Form from "./Form";
 import Modal from "./Modal";
 
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
 const Container = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px, 1fr));
   gap: 1rem;
-  flex-wrap: wrap;
+  justify-items: center;
 `
 
 function ListProducts({ products }) {
@@ -35,7 +31,7 @@ function ListProducts({ products }) {
   }
 
   return (
-    <Wrapper>
+    <>
       <Container>
         {products ? products.map((product) => (
           <Card
@@ -54,7 +50,7 @@ function ListProducts({ products }) {
       >
         <Form product={singleProduct} modal={setOpen} />
       </Modal>
-    </Wrapper>
+    </>
   )
 }
 
