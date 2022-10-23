@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Se elaboro el proyecto incluyendo las funciones básicas **CRUD** y realizando las peticiones de [FAKE STORE API](https://fakestoreapi.com/docs)
 
-## Available Scripts
+## Features
+Tiene 2 páginas
+- `/home` - `/` :  Muestra la lista de todo los productos
+- `/category/[nombre de la categoria]` :  Muestra los productos filtrados por categoria
+- Incluye un buscador global, además cada producto que se muestra tiene la opción de editarlo o eliminarlo de la lista y de igual forma puedes agregar un nuevo producto.
 
-In the project directory, you can run:
+## FakestoreAPI
+```
+https://fakestoreapi.com/
+```
+## Get Started
+Primero clonar el repositorio
+```
+git clone git@github.com:CinKat/store.git
+```
 
-### `npm start`
+Luego, instalar dependencias
+```
+npm install
+# o
+yarn intall
+```
+Agregar las variables de ambientes y enlace de API, puedes usar el archivo env.template
+```
+REACT_APP_BASE_URI=
+```
+Y por ultimo ejecutar 
+```
+npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Librerias, componentes o bibliotecas usados
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Emotion
 
-### `npm test`
+[Emotion](https://emotion.sh/docs/introduction) es una libreria diseñada para escribir estilos CSS en JS, proporciona una composición de estilos predecible.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+En este caso use emotion ya que me permite crear CSS usando Javascript, de esta forma evito separar los archivos CSS. Además los estilos que se inyectan se están ocupando de manera automática, quiero decir que los usuarios cargaran menor cantidad de código.
+Cuando se define los estilos, realmente estamos creando componentes en React, ahora al estar todo en un solo componente, es más fácil darle mantenimiento.
 
-### `npm run build`
+### React Router
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[React Router](https://reactrouter.com/en/dev/start/overview) es una colección de componentes de navegación la cual podemos usar en web o en móvil con React Native. Con esta librería vamos a obtener un enrutamiento dinámico gracias a los componentes, en otras palabras tenemos unas rutas que renderizan un componente.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Use react router porque me permite crear rutas fijas, ya sea mostranto un formulario, lista o tablas de datos, etc. También me permite crear rutas dinámicas, para mostrar datos de un cliente o producto en específico, etc.
