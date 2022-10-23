@@ -30,7 +30,6 @@ function Form({ product, modal }) {
   });
 
   const [errors, setErrors] = useState({})
-  console.log(dataForm)
 
   function validationForm(form) {
     let errors = {}
@@ -73,7 +72,6 @@ function Form({ product, modal }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(errors)
     if (Object.keys(errors).length === 0) {
       product ? update(product.id, dataForm) : create(dataForm)
       modal(false)
@@ -82,7 +80,6 @@ function Form({ product, modal }) {
     }
   }
 
-  console.log(product)
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>

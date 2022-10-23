@@ -10,6 +10,11 @@ const Wrapper = styled.section`
   flex-direction: column;
   gap: 1rem;
 `
+const Container = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+`
 
 function ListProducts({ products }) {
   const [isOpen, setOpen] = useState(false);
@@ -31,13 +36,17 @@ function ListProducts({ products }) {
 
   return (
     <Wrapper>
-      {products ? products.map((product) => (
-        <Card
-          product={product}
-          key={product.title}
-          isOpen={isOpen}
-          getProduct={handleProduct} />
-      )) : ''}
+      <Container>
+        {products ? products.map((product) => (
+          <Card
+            product={product}
+            key={product.title}
+            isOpen={isOpen}
+            getProduct={handleProduct} />
+        )) : ''}
+      </Container>
+
+
       <Modal
         state={isOpen}
         changeState={setOpen}

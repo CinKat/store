@@ -8,6 +8,9 @@ import { colors } from "./styles/colors";
 const Container = styled.div`
   margin: 1.5rem 1rem;
   background-color: ${colors.main.white};
+  @media (min-width: 600px) {
+    margin: 1.5rem 6rem;
+  }
 `
 
 function App() {

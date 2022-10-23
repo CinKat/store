@@ -12,6 +12,16 @@ const StyledHeader = styled.header`
   padding: 2rem 1rem 1.5rem 1rem;
   background-color: ${colors.base.softBackground};
   margin-bottom: 2rem;
+  @media (min-width: 600px) {
+    padding: 2rem 6rem;
+    display: flex;
+    gap: 5.6rem;
+  }
+`
+const Form = styled.form`
+  @media (min-width: 600px) {
+    width: 100%;
+  }
 `
 const StyledButton = styled.button`
   border: none;
@@ -55,12 +65,12 @@ function Search({ query, onSearch }) {
         <StyledButton onClick={handleClick}>
           <img src={logo} />
         </StyledButton>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <InputSearch
             value={query}
             onChange={handleFilter}
           />
-        </form>
+        </Form>
       </StyledHeader>
       {filterData && filterData.length === 0 && query !== '' ?
         <Warning>The product was not found</Warning> : ''}

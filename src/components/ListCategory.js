@@ -8,6 +8,12 @@ export const Title = styled.h1`
   ${typography.head.h2};
   text-transform: capitalize;
 `
+const Container = styled.div`
+  @media (min-width: 600px) {
+    display: flex;
+    gap: 2rem;
+  }
+`
 
 const Wrapper = styled(Link)`
   background-color: ${(props) => (props.color)};
@@ -19,13 +25,20 @@ const Wrapper = styled(Link)`
   align-items: center;
   text-decoration: none;
   color: ${colors.main.medium};
+  @media (min-width: 800px) {
+    width: 9rem;
+  }
+
+  @media (min-width: 900px) {
+    min-width: 16rem;
+  }
 `
 
 function ListCategory() {
   const { categories } = useAuth()
 
   return (
-    <>
+    <Container>
       {categories ? categories.map(({ name, Icon, color } = categories) => (
         <Wrapper
           to={`category/${name}`}
@@ -35,7 +48,7 @@ function ListCategory() {
           <Title>{name}</Title>
         </Wrapper>
       )) : ''}
-    </>
+    </Container>
   );
 }
 

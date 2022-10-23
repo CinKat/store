@@ -3,7 +3,6 @@ import { colors } from "../styles/colors"
 import { typography } from "../styles/typography"
 import { AiOutlineEdit } from 'react-icons/ai'
 import { CgTrash } from 'react-icons/cg'
-import { useEffect, useState } from "react"
 import Rating from "./Rating"
 import { useAuth } from "../context/auth-context"
 
@@ -13,17 +12,17 @@ const Img = styled.img`
   display: block;
   margin-left: auto;
   margin-right: auto;
+  object-fit: contain;
 `
 const ContentCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 12rem;
+  width: 16rem;
   padding: 0.5rem 0.5rem 1rem 0.5rem;
   background: ${colors.main.white};
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
   border-radius: 0.3rem;
-  margin: auto;
 `
 export const Subtitle = styled.p`
   ${typography.text.txt1};
@@ -36,10 +35,12 @@ const Price = styled.h2`
 const CustomIcon = styled.button`
   background-color: ${colors.main.third};
   border-radius: 50%;
+  border: none;
   width: 1.7rem;
   display: flex;
   justify-content: center;
-  padding: 0.2rem;
+  padding: 0.4rem;
+  cursor: pointer;
 `
 const FooterCard = styled.div`
   display: flex;
